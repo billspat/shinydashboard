@@ -5,6 +5,7 @@ library(shinydashboard)
 
 header <- dashboardHeader(
   title = "Dashboard Demo",
+  controlsidebar=TRUE,
 
   # Dropdown menu for messages
   dropdownMenu(

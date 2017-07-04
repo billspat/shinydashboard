@@ -5,7 +5,7 @@
 \title{Create a header for a dashboard page}
 \usage{
 dashboardHeader(..., title = NULL, titleWidth = NULL, disable = FALSE,
-  .list = NULL)
+  controlsidebar = FALSE, .list = NULL)
 }
 \arguments{
 \item{...}{Items to put in the header. Should be \code{\link{dropdownMenu}}s.}
@@ -21,6 +21,9 @@ in CSS units.}
 
 \item{disable}{If \code{TRUE}, don't display the header bar.}
 
+\item{controlsidebar}{optional If \code{TRUE}, add gears icon to toggle sidebar to items,
+but sidebar code must be added to the dashboard page}
+
 \item{.list}{An optional list containing items to put in the header. Same as
 the \code{...} arguments, but in list format. This can be useful when
 working with programmatically generated items.}
@@ -34,10 +37,10 @@ on the right side.
 if (interactive()) {
 library(shiny)
 
-# A dashboard header with 3 dropdown menus
+# A dashboard header with 3 dropdown menus and control sidebar
 header <- dashboardHeader(
   title = "Dashboard Demo",
-
+  controlsidebar = T,
   # Dropdown menu for messages
   dropdownMenu(type = "messages", badgeStatus = "success",
     messageItem("Support Team",

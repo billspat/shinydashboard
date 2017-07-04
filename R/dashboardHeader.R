@@ -11,6 +11,8 @@
 #'   which specifies the width in pixels, or a string that specifies the width
 #'   in CSS units.
 #' @param disable If \code{TRUE}, don't display the header bar.
+#' @param controlsidebar optional If \code{TRUE}, add gears icon to toggle sidebar to items,
+#'   but sidebar code must be added to the dashboard page
 #' @param ... Items to put in the header. Should be \code{\link{dropdownMenu}}s.
 #' @param .list An optional list containing items to put in the header. Same as
 #'   the \code{...} arguments, but in list format. This can be useful when
@@ -23,10 +25,10 @@
 #' if (interactive()) {
 #' library(shiny)
 #'
-#' # A dashboard header with 3 dropdown menus
+#' # A dashboard header with 3 dropdown menus and control sidebar
 #' header <- dashboardHeader(
 #'   title = "Dashboard Demo",
-#'
+#'   controlsidebar = T,
 #'   # Dropdown menu for messages
 #'   dropdownMenu(type = "messages", badgeStatus = "success",
 #'     messageItem("Support Team",
@@ -86,10 +88,10 @@
 #' )
 #' }
 #' @export
-dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, .list = NULL) {
+dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALSE, controlsidebar=FALSE, .list = NULL) {
   items <- c(list(...), .list)
-  lapply(items, tagAssert, type = "li", class = "dropdown")
 
+  lapply(items, tagAssert, type = "li", class = "dropdown")
   titleWidth <- validateCssUnit(titleWidth)
 
   # Set up custom CSS for custom width.
@@ -126,7 +128,9 @@ dashboardHeader <- function(..., title = NULL, titleWidth = NULL, disable = FALS
       ),
       div(class = "navbar-custom-menu",
         tags$ul(class = "nav navbar-nav",
-          items
+          items,
+          if(controlsidebar==TRUE) controlsidebartoggle()
+
         )
       )
     )
@@ -307,6 +311,17 @@ taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
           span(class = "sr-only", paste0(value, "% complete"))
         )
       )
+    )
+  )
+}
+
+
+#' create control-sidebar toggle menu item
+#' used internally when dashboardHeader(controlsidebar = TRUE)
+controlsidebartoggle <- function(){
+  tags$li(
+    a(href="#", `data-toggle`="control-sidebar",
+      tags$i(class="fa fa-gears")
     )
   )
 }
