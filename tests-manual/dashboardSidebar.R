@@ -1,7 +1,7 @@
 ## This creates 4 tabs (dashboard, widget and 2 charts) on the sidebar allowing to switch the content of each tab.
 
 header <- dashboardHeader()
-
+footor <- dashboardFooter()
 sidebar <- dashboardSidebar(
   sidebarUserPanel(
     "User Name",

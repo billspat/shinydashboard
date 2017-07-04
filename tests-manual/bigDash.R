@@ -3,8 +3,9 @@
 library(shiny)
 library(shinydashboard)
 
+dashtitle <- "Dashboard Demo"
 header <- dashboardHeader(
-  title = "Dashboard Demo",
+  title = dashtitle,
 
   # Dropdown menu for messages
   dropdownMenu(
@@ -246,6 +247,18 @@ body <- dashboardBody(tabItems(
 
 )
 
+copyrighttext <- function(holder= (if(""==Sys.getenv("USERNAME")) Sys.getenv("USER") else Sys.getenv("USERNAME"))){
+  paste("Copyright", format(Sys.Date(),"%Y"),holder )
+}
+
+footer <- dashboardFooter(
+  tags$strong(dashtitle),
+  HTML("|"),
+  tags$i(copyrighttext()),
+  version=paste("version ", packageVersion("shinydashboard"))
+)
+
+
 server <- function(input, output) {
   set.seed(122)
   histdata <- rnorm(500)
@@ -304,8 +317,11 @@ server <- function(input, output) {
   })
 }
 
+
+
 ui <- dashboardPage(header,
                     sidebar,
-                    body)
+                    body,
+                    footer)
 
 shinyApp(ui, server)

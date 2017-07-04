@@ -5,6 +5,7 @@
 #' @param header A header created by \code{dashboardHeader}.
 #' @param sidebar A sidebar created by \code{dashboardSidebar}.
 #' @param body A body created by \code{dashboardBody}.
+#' @param footer Optional, A footer created by \code{dashboardFooter}.
 #' @param title A title to display in the browser's title bar. If no value is
 #'   provided, it will try to extract the title from the \code{dashboardHeader}.
 #' @param skin A color theme. One of \code{"blue"}, \code{"black"},
@@ -28,12 +29,16 @@
 #' )
 #' }
 #' @export
-dashboardPage <- function(header, sidebar, body, title = NULL,
+dashboardPage <- function(header, sidebar, body, footer=NULL, title = NULL,
   skin = c("blue", "black", "purple", "green", "red", "yellow")) {
 
   tagAssert(header, type = "header", class = "main-header")
   tagAssert(sidebar, type = "aside", class = "main-sidebar")
   tagAssert(body, type = "div", class = "content-wrapper")
+
+  footer <- footer %OR% dashboardFooter()
+  tagAssert(footer, type = "footer", class = "main-footer")
+
   skin <- match.arg(skin)
 
   extractTitle <- function(header) {
@@ -51,10 +56,12 @@ dashboardPage <- function(header, sidebar, body, title = NULL,
 
   title <- title %OR% extractTitle(header)
 
+
   content <- div(class = "wrapper",
     header,
     sidebar,
-    body
+    body,
+    footer
   )
 
   # if the sidebar has the attribute `data-collapsed = "true"`, it means that
