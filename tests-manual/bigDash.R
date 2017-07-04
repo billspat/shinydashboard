@@ -247,6 +247,29 @@ body <- dashboardBody(tabItems(
 
 )
 
+controlsidebar <- dashboardControlSidebar(
+  div(class="tab-content",
+    div(class="tab-pane-active", id="controlsidebartab",
+      h4(class="control-sidebar-heading", "Control Sidebar"),
+      tags$ul(class="control-sidebar-menu",
+        list(
+          tags$li(
+              tags$a(href="javascript:void(0)",
+                tags$h4(class="control-sidebar-subheading", "Item 1")
+              )),
+             tags$li(
+               tags$a(href="javascript:void(0)",
+               tags$h4(class="control-sidebar-subheading", "Item 2")
+              ))
+        )
+      )
+    )
+  )
+)
+
+
+# <h4 class="control-sidebar-subheading">Custom Template Design</h4>
+
 server <- function(input, output) {
   set.seed(122)
   histdata <- rnorm(500)
@@ -307,6 +330,7 @@ server <- function(input, output) {
 
 ui <- dashboardPage(header,
                     sidebar,
-                    body)
+                    body,
+                    controlsidebar)
 
 shinyApp(ui, server)

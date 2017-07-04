@@ -318,6 +318,7 @@ taskItem <- function(text, value = 0, color = "aqua", href = NULL) {
 
 #' create control-sidebar toggle menu item
 #' used internally when dashboardHeader(controlsidebar = TRUE)
+#' @keywords internal
 controlsidebartoggle <- function(){
   tags$li(
     a(href="#", `data-toggle`="control-sidebar",

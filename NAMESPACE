@@ -2,6 +2,7 @@
 
 export(box)
 export(dashboardBody)
+export(dashboardControlSidebar)
 export(dashboardHeader)
 export(dashboardPage)
 export(dashboardSidebar)

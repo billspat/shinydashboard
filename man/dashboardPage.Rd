@@ -4,8 +4,8 @@
 \alias{dashboardPage}
 \title{Dashboard page}
 \usage{
-dashboardPage(header, sidebar, body, title = NULL, skin = c("blue", "black",
-  "purple", "green", "red", "yellow"))
+dashboardPage(header, sidebar, body, controlsidebar = NULL, title = NULL,
+  skin = c("blue", "black", "purple", "green", "red", "yellow"))
 }
 \arguments{
 \item{header}{A header created by \code{dashboardHeader}.}
@@ -13,6 +13,9 @@ dashboardPage(header, sidebar, body, title = NULL, skin = c("blue", "black",
 \item{sidebar}{A sidebar created by \code{dashboardSidebar}.}
 
 \item{body}{A body created by \code{dashboardBody}.}
+
+\item{controlsidebar}{optional shinycomponent for right sidebar \code{dashboardControlSides}
+toggled with icon in header, if it's enabled in the \code{dashboardHeader}.}
 
 \item{title}{A title to display in the browser's title bar. If no value is
 provided, it will try to extract the title from the \code{dashboardHeader}.}
@@ -33,6 +36,7 @@ shinyApp(
     dashboardHeader(),
     dashboardSidebar(),
     dashboardBody(),
+    dashboardControlSidebar(),
     title = "Dashboard example"
   ),
   server = function(input, output) { }
