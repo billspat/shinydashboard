@@ -3,8 +3,7 @@
 \name{dashboardControlSidebar}
 \alias{dashboardControlSidebar}
 \title{create HTML for a control-sidebar per AdminLTE theme for use on the dashboard
-sidebar is an aside and included in the page
-currently also requires a toggle switch in the dashboardHeader(controlsidebar = TRUE)}
+sidebar is an aside and included in the page}
 \usage{
 dashboardControlSidebar(...)
 }
@@ -12,7 +11,6 @@ dashboardControlSidebar(...)
 \item{...}{list of items to include on the sidebar}
 }
 \description{
-create HTML for a control-sidebar per AdminLTE theme for use on the dashboard
-sidebar is an aside and included in the page
-currently also requires a toggle switch in the dashboardHeader(controlsidebar = TRUE)
+to see this menu, it also requires a toggle switch in the dashboardHeader, enabled with
+parameter (controlsidebar = TRUE)
 }

@@ -1,6 +1,9 @@
+
 #' create HTML for a control-sidebar per AdminLTE theme for use on the dashboard
 #' sidebar is an aside and included in the page
-#' currently also requires a toggle switch in the dashboardHeader(controlsidebar = TRUE)
+#'
+#' to see this menu, it also requires a toggle switch in the dashboardHeader, enabled with
+#' parameter (controlsidebar = TRUE)
 #' @param ... list of items to include on the sidebar
 #'
 #' @export
@@ -30,10 +33,52 @@ controlSidebarContent <- function(){
   )
 }
 
+#' create a UL list with sidebar menu class
+#' @param ... list of items to go into the menu, each an <li> element
+#'    or controlsidebarMenuItem()
+#' @export
+controlsidebarMenu <- function(..., heading=NULL){
+  if (is.null(heading)){
+    heading = "Control Menu"
+  }
+
+
+  items = list(...)
+  lapply(items, tagAssert, type = "li")
+
+  # note that in adminlte, the control sidebar has tabs and tab content
+  # here there is no tabs, just a single tab content div to maintain the style
+  div(class="tab-content",
+      div(class="tab-pane active", id="control-sidebar-only-tab",
+          h3(class="control-sidebar-heading", heading),
+          tags$ul(class="control-sidebar-menu",
+              items
+              )
+      )
+    )
+}
+
+
+#' create items to go into controlsidebar
+#' @param text text inside <p> element
+#' @export
+controlsidebarMenuItem <- function(text, icon = shiny::icon("code"),  href = NULL, heading=NA ){
+  tagAssert(icon, type = "i")
+  if (is.null(href)) href <- "#"
+  tags$li(
+    tags$a(href=href, icon,
+        div(class="menu-info",
+          if(!is.na(heading)){tags$h4(class="control-sidebar-subheading", heading)},
+          p(text)
+        )
+    )
+  )
+}
+
 recentActivityExampleList <- function(){
   HTML('
       <h3 class="control-sidebar-heading">Recent Activity</h3>
-      <ul class="control-sidebar-menu">
+      <ul >
            <li>
            <a href="javascript:void(0)">
            <i class="menu-icon fa fa-user bg-yellow"></i>
@@ -75,3 +120,5 @@ recentActivityExampleList <- function(){
 #   <li class="active"><a href="#control-sidebar-theme-demo-options-tab" data-toggle="tab"><i class="fa fa-wrench"></i></a></li><li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
 #   <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
 # </ul>
+
+
