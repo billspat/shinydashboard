@@ -2,7 +2,7 @@
 % Please edit documentation in R/menuOutput.R
 \name{menuOutput}
 \alias{menuOutput}
-\title{Create a dynamic menu output for shinydashboard (client side)}
+\title{menuOutput}
 \usage{
 menuOutput(outputId, tag = tags$li)
 }
@@ -12,6 +12,7 @@ menuOutput(outputId, tag = tags$li)
 \item{tag}{A tag function, like \code{tags$li} or \code{tags$ul}.}
 }
 \description{
+Create a dynamic menu output for shinydashboard (client side)
 This can be used as a placeholder for dynamically-generated
 \code{\link{dropdownMenu}}, \code{\link{notificationItem}},
 \code{\link{messageItem}}, \code{\link{taskItem}} \code{\link{sidebarMenu}},

@@ -2,9 +2,9 @@
 % Please edit documentation in R/menuOutput.R
 \name{controlMenuOutput}
 \alias{controlMenuOutput}
-\title{Create a dynamic menu output for shinydashboard (client side)}
+\title{controlMenu Output}
 \usage{
-controlMenuOutput(outputId, tag = tags$li)
+controlMenuOutput(outputId, tag = tags$div)
 }
 \arguments{
 \item{outputId}{Output variable name.}
@@ -12,6 +12,9 @@ controlMenuOutput(outputId, tag = tags$li)
 \item{tag}{A tag function, like \code{tags$li} or \code{tags$ul}.}
 }
 \description{
+Create a dynamic menu output for shinydashboard (client side)
+}
+\details{
 This can be used as a placeholder for dynamically-generated
 \code{\link{controlsidebarMenu}},  \code{\link{controlsidebarMenuItem}}
 Note this is the same as menuOutput but uses a different class to identify it

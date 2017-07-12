@@ -1,5 +1,6 @@
-#' Create a dynamic menu output for shinydashboard (client side)
+#' menuOutput
 #'
+#' Create a dynamic menu output for shinydashboard (client side)
 #' This can be used as a placeholder for dynamically-generated
 #' \code{\link{dropdownMenu}}, \code{\link{notificationItem}},
 #' \code{\link{messageItem}}, \code{\link{taskItem}} \code{\link{sidebarMenu}},
@@ -18,6 +19,8 @@ menuOutput <- function(outputId, tag = tags$li) {
   tag(id = outputId, class = "shinydashboard-menu-output")
 }
 
+#' controlMenu Output
+#'
 #' Create a dynamic menu output for shinydashboard (client side)
 #'
 #' This can be used as a placeholder for dynamically-generated
@@ -74,7 +77,8 @@ menuItemOutput <- function(outputId) {
   menuOutput(outputId = outputId, tag = tags$li)
 }
 
-
+#' renderMenu
+#'
 #' Create dynamic menu output (server side)
 #'
 #' @inheritParams shiny::renderUI
@@ -154,17 +158,67 @@ menuItemOutput <- function(outputId) {
 #' shinyApp(ui, server)
 #' }
 renderMenu <- shiny::renderUI
+#
 
 
-
-#' Create dynamic menu output (server side).  This is simply an alias for
-#' \code{\link{ shiny::renderUI}} which puts replaces contents of control menu
+#' @title render ControlMenu
+#'
+#' Create dynamic right-side controlmenu output (server side)
+#'
+#' @details
+#' This is simply an alias for \code{\link[shiny]{renderUI}} which
+#' puts replaces contents of control menu
 #'
 #' @inheritParams shiny::renderUI
 #'
 #' @seealso \code{\link{controlMenuOutput}} for the corresponding client side function
 #'   and examples.
 #' @family menu outputs
+#' @examples
+#' ## Only run these examples in interactive R sessions
+#'
+#' if (interactive()) {
+#' ## Dynamically render controlmenu sidebar items with other shiny controls (sliders)
+#'
+#' library(shiny)
+#'
+#' ui <- dashboardPage(
+#'   dashboardHeader(
+#'     title = "Dynamic menus",
+#'     # this parameter is required to display icon that triggers control-sidebar js
+#'     controlsidebar = TRUE
+#'   ),
+#'   dashboardSidebar(),
+#'   dashboardBody(
+#'     fluidRow(
+#'       box(
+#'         title = "Parameters",
+#'         sliderInput("slider1", "alpha", 1, 100, 50),
+#'         sliderInput("slider2", "beta", 1, 100, 50),
+#'         sliderInput("slider3", "gamma", 1, 100, 50)
+#'       )
+#'     )
+#'   ),
+#'   dashboardControlSidebar(
+#'     # display server-side control-sidebar menu output
+#'     controlMenuOutput("controlMenu")
+#'   )
+#'
+#' )
+#'
+#' server <- function(input, output) {
+#'   # Code to connect UI controls to controlsidebar menu dynamically
+#'   output$controlMenu <- renderControlMenu({
+#'     controlsidebarMenu( controlsidebarMenuItem(p(input$slider1),headerText="alpha"),
+#'                        controlsidebarMenuItem(p(input$slider2),headerText="beta"),
+#'                        controlsidebarMenuItem(p(input$slider3),headerText="gamma"),
+#'                        headerText = "Parameters")
+#'   })
+#'
+#' }
+#'
+#' shinyApp(ui, server)
+#' }
 #' @export
 renderControlMenu <- shiny::renderUI
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/menuOutput.R
 \name{renderMenu}
 \alias{renderMenu}
-\title{Create dynamic menu output (server side)}
+\title{renderMenu}
 \usage{
 renderMenu(expr, env = parent.frame(), quoted = FALSE,
   outputArgs = list())
