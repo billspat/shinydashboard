@@ -4,6 +4,7 @@
 #'
 #' to see this menu, it also requires a toggle switch in the dashboardHeader, enabled with
 #' parameter (controlsidebar = TRUE)
+#' This sidebar should contain items of r
 #' @param ... list of items to include on the sidebar
 #'
 #' @export
@@ -15,61 +16,52 @@ dashboardControlSidebar <- function(...){
 
 
 
-controlSidebarContent <- function(){
-  div(class="tab-pane active", id="control-sidebar-settings-tab",
-    # <form method="post">
-    h3(class="control-sidebar-heading", HTML('General Settings')),
-
-    div(class="form-group",
-      HTML('<label class="control-sidebar-subheading">
-      Report panel usage
-      <input type="checkbox" class="pull-right" checked="">
-      </label>'),
-      p("Some information about this general settings option"),
-      p('Other sets of options are available')
-    ),
-
-  h3(class="control-sidebar-heading", 'Second Heading')
-  )
-}
-
-#' create a UL list with sidebar menu class
+#' create a UL list with sidebar menu class to go inside \code{\link{dashboardControlSidebar}}
 #' @param ... list of items to go into the menu, each an <li> element
 #'    or controlsidebarMenuItem()
+#' @param headerText if preseent display header prior to showing items.  The AdminLTE theme has a large
+#'    space for this to it's recommend to include a heading
+#' @param .list useful for building dynamic parameters
 #' @export
-controlsidebarMenu <- function(..., heading=NULL){
-  if (is.null(heading)){
-    heading = "Control Menu"
-  }
-
-
-  items = list(...)
-  lapply(items, tagAssert, type = "li")
+controlsidebarMenu <- function(..., headerText=NULL, .list=NULL){
+  items <- c(list(...), .list)
+  # this ensures the elements sent all start with 'li'
+  # but it's not recognizing as shiny.tags (to nests lists? ) so disabled for now
+  # lapply(items, tagAssert, type = "li")
 
   # note that in adminlte, the control sidebar has tabs and tab content
   # here there is no tabs, just a single tab content div to maintain the style
   div(class="tab-content",
       div(class="tab-pane active", id="control-sidebar-only-tab",
-          h3(class="control-sidebar-heading", heading),
+          if (!is.null(headerText)){
+              h3(class="control-sidebar-heading", headerText)
+          },
           tags$ul(class="control-sidebar-menu",
               items
-              )
+          )
       )
     )
 }
 
 
-#' create items to go into controlsidebar
-#' @param text text inside <p> element
+#' create items to go into controlsidebar menu
+#' this is a simplified version from what is in the AdminLTE theme: no icon, and simply
+#' a header and any number of basic items below it (p, lists, small tables, etc)
+#' @param ... items in the body of the menu item (encased in a and then a div)
+#' @param href value of the href attribute of the encasing a tag.  could be a url, default #
+#' @param headerText An optional text argument used for the header of the item
+#' @param .list  An optional list containing items to put in the menu Same as the
+#'   \code{...} arguments, but in list format. This can be useful when working
+#'   with programmatically generated items.
 #' @export
-controlsidebarMenuItem <- function(text, icon = shiny::icon("code"),  href = NULL, heading=NA ){
-  tagAssert(icon, type = "i")
+controlsidebarMenuItem <- function(...,  href = NULL, headerText=NA, .list=NULL){
   if (is.null(href)) href <- "#"
+  items <- c(list(...), .list)
   tags$li(
-    tags$a(href=href, icon,
-        div(class="menu-info",
-          if(!is.na(heading)){tags$h4(class="control-sidebar-subheading", heading)},
-          p(text)
+    tags$a(href=href,
+        div(class="",
+          if(!is.na(headerText)){tags$h4(class="control-sidebar-subheading", headerText)},
+          items
         )
     )
   )
@@ -122,3 +114,21 @@ recentActivityExampleList <- function(){
 # </ul>
 
 
+
+controlSidebarContent <- function(){
+  div(class="tab-pane active", id="control-sidebar-settings-tab",
+      # <form method="post">
+      h3(class="control-sidebar-heading", HTML('General Settings')),
+
+      div(class="form-group",
+          HTML('<label class="control-sidebar-subheading">
+               Report panel usage
+               <input type="checkbox" class="pull-right" checked="">
+               </label>'),
+          p("Some information about this general settings option"),
+          p('Other sets of options are available')
+          ),
+
+      h3(class="control-sidebar-heading", 'Second Heading')
+      )
+}

@@ -2,14 +2,25 @@
 % Please edit documentation in R/dashboardControlSidebar.R
 \name{controlsidebarMenuItem}
 \alias{controlsidebarMenuItem}
-\title{create items to go into controlsidebar}
+\title{create items to go into controlsidebar menu
+this is a simplified version from what is in the AdminLTE theme: no icon, and simply
+a header and any number of basic items below it (p, lists, small tables, etc)}
 \usage{
-controlsidebarMenuItem(text, icon = shiny::icon("code"), href = NULL,
-  heading = NA)
+controlsidebarMenuItem(..., href = NULL, headerText = NA, .list = NULL)
 }
 \arguments{
-\item{text}{text inside <p> element}
+\item{...}{items in the body of the menu item (encased in a and then a div)}
+
+\item{href}{value of the href attribute of the encasing a tag.  could be a url, default #}
+
+\item{headerText}{An optional text argument used for the header of the item}
+
+\item{.list}{An optional list containing items to put in the menu Same as the
+\code{...} arguments, but in list format. This can be useful when working
+with programmatically generated items.}
 }
 \description{
-create items to go into controlsidebar
+create items to go into controlsidebar menu
+this is a simplified version from what is in the AdminLTE theme: no icon, and simply
+a header and any number of basic items below it (p, lists, small tables, etc)
 }

@@ -18,6 +18,18 @@ menuOutput <- function(outputId, tag = tags$li) {
   tag(id = outputId, class = "shinydashboard-menu-output")
 }
 
+#' Create a dynamic menu output for shinydashboard (client side)
+#'
+#' This can be used as a placeholder for dynamically-generated
+#' \code{\link{controlsidebarMenu}},  \code{\link{controlsidebarMenuItem}}
+#' Note this is the same as menuOutput but uses a different class to identify it
+#' hence uses a different javascript function to render in shinydashboard.js
+#' @inheritParams menuOutput
+#' @family menu outputs
+#' @export
+controlMenuOutput <- function(outputId, tag = tags$li) {
+  tag(id = outputId, class = "shinydashboard-controlmenu-output")
+}
 
 #' Create a dropdown menu output (client side)
 #'
@@ -143,9 +155,24 @@ menuItemOutput <- function(outputId) {
 #' }
 renderMenu <- shiny::renderUI
 
+
+
+#' Create dynamic menu output (server side).  This is simply an alias for
+#' \code{\link{ shiny::renderUI}} which puts replaces contents of control menu
+#'
+#' @inheritParams shiny::renderUI
+#'
+#' @seealso \code{\link{controlMenuOutput}} for the corresponding client side function
+#'   and examples.
+#' @family menu outputs
+#' @export
+renderControlMenu <- shiny::renderUI
+
 # R CMD check thinks that shiny::renderUI has an undeclared global variable
 # called "func".
 globalVariables("func")
+
+
 
 #' Create a dropdown menu output (server side; deprecated)
 #'
@@ -157,3 +184,4 @@ renderDropdownMenu <- function(expr, env = parent.frame(), quoted = FALSE) {
   .Deprecated("renderMenu")
    shiny::renderUI(expr, env, quoted, func = FALSE)
 }
+

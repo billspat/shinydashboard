@@ -24,7 +24,9 @@ present; for example, \code{\link{dropdownMenuOutput}} and
 \code{\link{renderMenu}} for the corresponding server side function
   and examples.
 
-Other menu outputs: \code{\link{dropdownMenuOutput}},
-  \code{\link{menuItemOutput}}, \code{\link{renderMenu}},
-  \code{\link{sidebarMenuOutput}}
+Other menu outputs: \code{\link{controlMenuOutput}},
+  \code{\link{dropdownMenuOutput}},
+  \code{\link{menuItemOutput}},
+  \code{\link{renderControlMenu}},
+  \code{\link{renderMenu}}, \code{\link{sidebarMenuOutput}}
 }

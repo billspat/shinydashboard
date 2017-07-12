@@ -2,14 +2,19 @@
 % Please edit documentation in R/dashboardControlSidebar.R
 \name{controlsidebarMenu}
 \alias{controlsidebarMenu}
-\title{create a UL list with sidebar menu class}
+\title{create a UL list with sidebar menu class to go inside \code{\link{dashboardControlSidebar}}}
 \usage{
-controlsidebarMenu(..., heading = NULL)
+controlsidebarMenu(..., headerText = NULL, .list = NULL)
 }
 \arguments{
 \item{...}{list of items to go into the menu, each an <li> element
 or controlsidebarMenuItem()}
+
+\item{headerText}{if preseent display header prior to showing items.  The AdminLTE theme has a large
+space for this to it's recommend to include a heading}
+
+\item{.list}{useful for building dynamic parameters}
 }
 \description{
-create a UL list with sidebar menu class
+create a UL list with sidebar menu class to go inside \code{\link{dashboardControlSidebar}}
 }

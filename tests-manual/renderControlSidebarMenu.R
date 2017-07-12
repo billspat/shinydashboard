@@ -40,11 +40,12 @@ ui <- dashboardPage(
     )
   ),
   dashboardControlSidebar(
-    controlsidebarMenu(
-      controlsidebarMenuItem("this is item 1",icon("table"),heading="Item 1"),
-      controlsidebarMenuItem("this is item 2",icon("table"),heading="Item 2"),
-      controlsidebarMenuItem("this is item 3",icon("table"),heading="Item 3")
-    )
+    controlMenuOutput("controlMenu")
+    # controlsidebarMenu(headerText = "Parameter List",
+    #   controlsidebarMenuItem(p(" 1"),headerText="alpha"),
+    #   controlsidebarMenuItem(p("2.0001"),headerText="beta"),
+    #   controlsidebarMenuItem(p("-3"),headerText="gamma")
+    # )
   )
 )
 
@@ -56,12 +57,21 @@ server <- function(input, output) {
     msgs <- apply(messageData, 1, function(row) {
       messageItem(
         from = row[["from"]],
-        message = paste(row[["message"]], input$slider)
+        message = paste(row[["message"]], input$slider1)
       )
     })
 
     dropdownMenu(type = "messages", .list = msgs)
   })
-}
+
+
+  output$controlMenu <- renderControlMenu({
+    controlsidebarMenu( controlsidebarMenuItem(p(input$slider1),headerText="alpha"),
+                       controlsidebarMenuItem(p(input$slider2),headerText="beta"),
+                       controlsidebarMenuItem(p(input$slider3),headerText="gamma"),
+                       title = "Parameters")
+  })
+
+} # end server
 
 shinyApp(ui, server)

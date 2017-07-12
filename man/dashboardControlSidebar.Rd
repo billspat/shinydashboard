@@ -13,4 +13,5 @@ dashboardControlSidebar(...)
 \description{
 to see this menu, it also requires a toggle switch in the dashboardHeader, enabled with
 parameter (controlsidebar = TRUE)
+This sidebar should contain items of r
 }

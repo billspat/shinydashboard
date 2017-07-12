@@ -37,6 +37,7 @@ module.exports = function(grunt) {
           srcdirjs + '_start.js',
           srcdirjs + 'tabs.js',
           srcdirjs + 'sidebar.js',
+          srcdirjs + 'output_binding_controlmenu.js',
           srcdirjs + 'output_binding_menu.js',
           srcdirjs + 'input_binding_tabItem.js',
           srcdirjs + 'input_binding_sidebarCollapsed.js',
