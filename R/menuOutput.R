@@ -27,7 +27,7 @@ menuOutput <- function(outputId, tag = tags$li) {
 #' @inheritParams menuOutput
 #' @family menu outputs
 #' @export
-controlMenuOutput <- function(outputId, tag = tags$li) {
+controlMenuOutput <- function(outputId, tag = tags$div) {
   tag(id = outputId, class = "shinydashboard-controlmenu-output")
 }
 
